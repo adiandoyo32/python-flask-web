@@ -37,11 +37,11 @@ def login():
             session['id'] = account['id']
             session['username'] = account['username']
             # Redirect to home page
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
       else:
             # Account doesnt exist or username/password incorrect
             flash("Incorrect username/password!", "danger")
-    return render_template('login.html',title="Login")
+    return render_template('auth/login.html',title="Login")
       # if (username == 'admin' and password == 'admin'):
       #   msg = 'Logged in successfully !'
       #   return redirect(url_for('index', msg = msg))
@@ -50,8 +50,31 @@ def login():
     # return render_template('login.html', msg = msg)
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+  # Check if user is loggedin
+    if 'loggedin' in session:
+        # User is loggedin show them the home page
+        return render_template('home/home.html', username=session['username'],title="Home")
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login'))
+  
+@app.route('/profile')
+def profile():
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        # User is loggedin show them the home page
+        return render_template('auth/profile.html', username=session['username'],title="Profile")
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login'))
+  
+from flask import redirect, url_for, session
+
+@app.route('/logout')
+def logout():
+    # Hapus session pengguna
+    session.pop('user', None)
+    # Redirect ke halaman login
+    return redirect(url_for('login'))
   
 @app.route('/', methods=['POST'])
 def my_form_post():
