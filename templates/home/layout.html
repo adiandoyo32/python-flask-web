@@ -13,17 +13,53 @@
 <body class="loggedin">
     <nav class="navtop">
         <div>
-            <h1>MikroDeploy</h1>
+            <h1>MikroDeploy</h1>   
             <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Home</a>
-            <a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>Profile</a>
+            <a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>History</a>
             <a href="{{ url_for('logout') }}" class="fas fa-sign-out-alt">Logout</a>
         </div>
     </nav>
-    <div class="content">
-        {% block content %}{% endblock %}
-    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+          
+          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">
+                    Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/add_user">
+                    Add User
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/block_by_port">
+                    Block by Port
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    Customers
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+  
+          <main class="col-md-9 ms-sm-auto col-lg-10">
+            {% block content %}{% endblock %}
+          </main>
+        </div>
+      </div>
+
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

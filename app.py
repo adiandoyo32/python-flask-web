@@ -57,7 +57,15 @@ def home():
         return render_template('home/home.html', username=session['username'],title="Home")
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
-  
+
+@app.route('/add_user')
+def addUser():
+    return render_template('home/add_user.html',title="Add User")
+
+@app.route('/block_by_port')
+def blockByPort():
+    return render_template('home/block_by_port.html', title="Block by Port")
+
 @app.route('/profile')
 def profile():
     # Check if user is loggedin
